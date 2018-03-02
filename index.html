@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<style>
+body {
+    background-color: #fcfcfc;
+    color: rgb(6, 66, 90);
+}
+.container {
+    height: 350px;
+    width: 500px;
+    margin: -175px 0 0 -250px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-perspective: 500px;
+}
+a {
+  text-decoration: none;
+}
+.inner {
+    margin: 0 auto;
+}
+h1 {
+    text-align: center;
+}
+.transformed {
+    display: inline-block;
+}
+</style>
+
+<div class="container">
+    <div class="inner">
+        <h1><span class="transformed">Ryan</span><span class="transformed"> Nabat</span></h1>
+        <p>Code monkey, physicist, android enthusiast, car audio modding, biking extraordinaire. A seasoned weekend craft beer and food explorer. </p>
+        <a class="transformed" href="http://linkedin.com/in/ryannabat">Contact me.</a>
+    </div>
+</div>
+
+<script>
+var sa = [];
+var p = $('.inner p');
+var t = p.text();
+var s = t.split(" ");
+for (i in s) {
+     sa.push('<span class="transformed">'+s[i]+'</span>');
+}
+ns = sa.join(" ");
+np = p.html(ns);
+
+(function() {
+  container = {
+    width  : 500,
+    height : 350
+  }
+    window.onmousemove = handleMouseMove;
+    function handleMouseMove(event) {
+        event = event || window.event; // IE-ism
+offset=$('.container').offset();
+
+relx=event.clientX-offset.left-(container.width/2);
+rely=event.clientY-offset.top-(container.height/2);
+rely = rely * -1
+deg = (Math.abs(relx) + Math.abs(rely))/40;
+console.log('x: '+relx+'  y: '+rely+'  deg: '+deg);
+        // event.clientX and event.clientY contain the mouse position
+        $('.transformed').css('transform','rotate3d('+relx+','+rely+',0,'+deg+'deg)')
+
+    }
+})();
+</script>
+
+</body>
+</html>
